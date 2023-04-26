@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Classified Ads</title>
+    <style>
+      .nav {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      .nav a {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Classified Ads</h1>
+    <div class="nav">
+      {% if username %}
+        <a href="{{ url_for('create_entry') }}">Create Entry</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </div>
+
+    {% if username %}
+      <p>Welcome to our site {{ username }}!</p>
+    {% endif %}
+
+    <h2>Entries:</h2>
+    <ul>
+      {% for entry in entries %}
+        <li><a href="{{ url_for('more_info', entry_id=entry.id) }}">{{ entry.make_model }} ({{ entry.year_built }})</a></li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

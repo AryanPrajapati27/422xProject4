@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Classified Ads - {{ entry.make_model }}</title>
+  </head>
+  <body>
+    <h1>{{ entry.make_model }} ({{ entry.year_built }})</h1>
+    <ul>
+      <li>Color: {{ entry.color }}</li>
+      <li>Type: {{ entry.type }}</li>
+      <li>Condition: {{ entry.condition }}</li>
+      <li>Price: ${{ entry.price }}</li>
+      <li>Description: {{ entry.description }}</li>
+      <li>City: {{ entry.city }}</li>
+      <li>Phone Number: {{ entry.phone_number }}</li>
+    </ul>
+  </body>
+</html>
