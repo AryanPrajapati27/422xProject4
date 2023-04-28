@@ -1,5 +1,5 @@
 from flask import Flask, session, flash, render_template, request, redirect, url_for
-from models import db, User, init_app, Boat
+from models import *
 from werkzeug.security import check_password_hash, generate_password_hash
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -18,6 +18,32 @@ def home():
     else:
         return render_template('home.html', entries=entries)
 
+@app.route('/for_sale/cars_trucks')
+def cars_trucks():
+    entries = Cars_Trucks.query.all()
+    return render_template('cars_trucks.html', entries=entries)
+
+@app.route('/for_sale/motorcycles')
+def motorcycles():
+    entries = Motorcycles.query.all()
+    return render_template('motorcycles.html', entries=entries)
+
+@app.route('/for_sale/boats')
+def boats():
+    entries = Boat.query.all()
+    return render_template('boats.html', entries=entries)
+
+@app.route('/for_sale/books')
+def books():
+    entries = Books.query.all()
+    return render_template('books.html', entries=entries)
+
+@app.route('/for_sale/furniture')
+def furniture():
+    entries = Furniture.query.all()
+    return render_template('furniture.html', entries=entries)
+
+
 @app.route('/more_info/<int:entry_id>')
 def more_info(entry_id):
     entry = Boat.query.filter_by(id=entry_id).first()
@@ -28,8 +54,8 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('home'))
 
-@app.route('/create_entry', methods=['GET', 'POST']) 
-def create_entry():
+@app.route('/create_boat', methods=['GET', 'POST']) 
+def create_boat():
     if request.method == 'POST':
         year_built = request.form['year_built']
         make_model = request.form['make_model']
@@ -50,6 +76,110 @@ def create_entry():
         db.session.commit()
         flash('New entry was successfully created.')
         return redirect(url_for('home'))
+
+    return render_template('createEntry.html')
+
+@app.route('/create_book', methods=['GET', 'POST']) 
+def create_book():
+    if request.method == 'POST':
+        year_released = request.form['year_released']
+        title = request.form['title']
+        author = request.form['author']
+        pages = request.form['pages']
+        condition = request.form['condition']
+        price = request.form['price']
+        description = request.form['description']
+        city = request.form['city']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Books(year_released=year_released, title=title, author=author, pages=pages,
+                     condition=condition, price=price, description=description, city=city,
+                     phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('createEntry.html')
+
+@app.route('/create_furniture', methods=['GET', 'POST']) 
+def create_furniture():
+    if request.method == 'POST':
+        year_made = request.form['year_made']
+        name = request.form['name']
+        color = request.form['color']
+        condition = request.form['condition']
+        price = request.form['price']
+        description = request.form['description']
+        city = request.form['city']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Furniture(year_made=year_made, name=name, color=color,
+                     condition=condition, price=price, description=description, city=city,
+                     phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('createEntry.html')
+
+@app.route('/create_motorcycles', methods=['GET', 'POST']) 
+def create_motorcycles():
+    if request.method == 'POST':
+        year_built = request.form['year_built']
+        make_model = request.form['make_model']
+        color = request.form['color']
+        boat_type = request.form['type']
+        condition = request.form['condition']
+        price = request.form['price']
+        description = request.form['description']
+        city = request.form['city']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Motorcycles(year_built=year_built, make_model=make_model, color=color, type=boat_type,
+                     condition=condition, price=price, description=description, city=city,
+                     phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('createEntry.html')
+
+@app.route('/create_cars_trucks', methods=['GET', 'POST']) 
+def create_cars_trucks():
+    if request.method == 'POST':
+        year_built = request.form['year_built']
+        make_model = request.form['make_model']
+        color = request.form['color']
+        boat_type = request.form['type']
+        condition = request.form['condition']
+        price = request.form['price']
+        description = request.form['description']
+        city = request.form['city']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Cars_Trucks(year_built=year_built, make_model=make_model, color=color, type=boat_type,
+                     condition=condition, price=price, description=description, city=city,
+                     phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('createEntry.html')
+
+@app.route('/create_entry', methods=['GET', 'POST']) 
+def create_entry():
     return render_template('createEntry.html')
 
 @app.route('/login', methods=['GET', 'POST'])
