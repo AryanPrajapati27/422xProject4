@@ -2,86 +2,60 @@
 <html>
   <head>
     <title>Create Entry</title>
+    <style>
+      .nav {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      .nav a {
+        margin-left: 10px;
+      }
+    </style>
     <script>
-
-      function boatsFunction() {
-        document.getElementById("boats-form").style.display = "block";
-        document.getElementById("books-form").style.display = "none";
-        document.getElementById("furniture-form").style.display = "none";
-        document.getElementById("cars_trucks-form").style.display = "none";
-        document.getElementById("motorcycles-form").style.display = "none";
-      }
-
-      function booksFunction() {
-        document.getElementById("boats-form").style.display = "none";
-        document.getElementById("books-form").style.display = "block";
-        document.getElementById("furniture-form").style.display = "none";
-        document.getElementById("cars_trucks-form").style.display = "none";
-        document.getElementById("motorcycles-form").style.display = "none";
-      }
-
-      function furnitureFunction() {
-        document.getElementById("boats-form").style.display = "none";
-        document.getElementById("books-form").style.display = "none";
-        document.getElementById("furniture-form").style.display = "block";
-        document.getElementById("cars_trucks-form").style.display = "none";
-        document.getElementById("motorcycles-form").style.display = "none";
-      }
-
-      function carsTrucksFunction() {
-        document.getElementById("boats-form").style.display = "none";
-        document.getElementById("books-form").style.display = "none";
-        document.getElementById("furniture-form").style.display = "none";
-        document.getElementById("cars_trucks-form").style.display = "block";
-        document.getElementById("motorcycles-form").style.display = "none";
-      }
-
-      function motorcyclesFunction() {
-        document.getElementById("boats-form").style.display = "none";
-        document.getElementById("books-form").style.display = "none";
-        document.getElementById("furniture-form").style.display = "none";
-        document.getElementById("cars_trucks-form").style.display = "none";
-        document.getElementById("motorcycles-form").style.display = "block";
-      }
-
-      function clear() {
-        document.getElementById("boats-form").style.display = "none";
-        document.getElementById("books-form").style.display = "none";
-        document.getElementById("furniture-form").style.display = "none";
-        document.getElementById("cars_trucks-form").style.display = "none";
-        document.getElementById("motorcycles-form").style.display = "none";
-      }
-
       function renderForm() {
         var selected = document.querySelector('input[name="for_sale"]:checked').value;
-        if (selected === 'cars_trucks') {
-            carsTrucksFunction();
-        } else if (selected === 'motorcycles') {
-            motorcyclesFunction();
-        } else if (selected === 'boats') {
-            boatsFunction();
-        } else if (selected === 'books') {
-            booksFunction();
-        } else if (selected === 'furniture') {
-            furnitureFunction();
-        } 
+        document.getElementById(selected + "-form").style.display = "block";
+        document.getElementById("selector").style.display = "none";
+        const radioButtons = document.getElementsByName('for_sale');
+
+        const label = document.querySelector(`label[for=${selected}]`);
+        const text = label.textContent;
+        var header = document.querySelector('h1');
+        header.textContent += (": " + text);
       }
     </script>
   </head>
-  <body onload="clear()">
+  <body>
     <h1>Create Entry</h1>
-    <form method="post">
-      <label>For Sale:</label>
-      <br>
-      <input type="radio" name="for_sale" value="cars_trucks">Cars/Trucks<br>
-      <input type="radio" name="for_sale" value="motorcycles">Motorcycles<br>
-      <input type="radio" name="for_sale" value="boats">Boats<br>
-      <input type="radio" name="for_sale" value="books">Books<br>
-      <input type="radio" name="for_sale" value="furniture">Furniture<br>
-      <br>
-      <button type="button" onclick="renderForm()">Submit!</button>
-    </form>
-
+    <div class="nav">
+      {% if username %}
+        <a href="{{ url_for('create_entry') }}">Create Entry</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </div>
+    <div id = "selector" style="display: block;">
+      <form method="post">
+        <label>For Sale:</label>
+        <br>
+        <input type="radio" id="cars_trucks" name="for_sale" value="cars_trucks">
+        <label for="cars_trucks">Cars/Trucks</label><br>
+        <input type="radio" id="motorcycles" name="for_sale" value="motorcycles">
+        <label for="motorcycles">Motorcycles</label><br>
+        <input type="radio" id="boats" name="for_sale" value="boats">
+        <label for="boats">Boats</label><br>
+        <input type="radio" id="books" name="for_sale" value="books">
+        <label for="books">Books</label><br>
+        <input type="radio" id="furniture" name="for_sale" value="furniture">
+        <label for="furniture">Furniture</label><br>
+        <br>
+        <button type="button" onclick="renderForm()">Submit!</button>
+      </form>  
+    </div>
+   
     <div id="boats-form" style="display: none;">
       <form method="POST" action="{{ url_for('create_boat') }}">
         <label for="year-built">Year Built:</label>
@@ -119,7 +93,7 @@
     <div id="books-form" style="display: none;">
       <form method="POST" action="{{ url_for('create_book') }}">
         <label for="year-released">Year Released:</label>
-        <input type="number" id="year-released" name="year-released" required><br><br>
+        <input type="number" id="year-released" name="year_released" required><br><br>
     
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required><br><br>
@@ -221,7 +195,7 @@
     <div id="furniture-form" style="display: none;">
       <form method="POST" action="{{ url_for('create_furniture') }}">
         <label for="year-made">Year Made:</label>
-        <input type="number" id="year-made" name="year-made" required><br><br>
+        <input type="number" id="year-made" name="year_made" required><br><br>
     
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>

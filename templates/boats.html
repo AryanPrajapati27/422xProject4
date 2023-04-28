@@ -17,7 +17,7 @@
     <h2>Entries:</h2>
     <ul>
       {% for entry in entries %}
-        <li><a href="{{ url_for('more_info', entry_id=entry.id) }}">{{ entry.make_model }} ({{ entry.year_built }})</a></li>
+        <li><a href="{{ url_for('more_info', entry_id=entry.id, type=entry.__class__.__name__)  }}">{{ entry.make_model }} ({{ entry.year_built }})</a></li>
       {% endfor %}
     </ul>
   </body>

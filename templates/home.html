@@ -15,6 +15,9 @@
   </head>
   <body>
     <h1>Classified Ads</h1>
+    {% if username %}
+      <p>Welcome to our site {{ username }}!</p>
+    {% endif %}  
     <nav>
       <ul>
         <li><a href="#">For Sale &darr;</a>
@@ -27,7 +30,8 @@
           </ul>
         </li>
       </ul>
-    </nav>    
+    </nav>  
+    
     <div class="nav">
       {% if username %}
         <a href="{{ url_for('create_entry') }}">Create Entry</a>
@@ -38,15 +42,8 @@
       {% endif %}
     </div>
 
-    {% if username %}
-      <p>Welcome to our site {{ username }}!</p>
-    {% endif %}
+    
 
-    <h2>Entries:</h2>
-    <ul>
-      {% for entry in entries %}
-        <li><a href="{{ url_for('more_info', entry_id=entry.id) }}">{{ entry.make_model }} ({{ entry.year_built }})</a></li>
-      {% endfor %}
-    </ul>
+    
   </body>
 </html>

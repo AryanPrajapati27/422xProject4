@@ -1,6 +1,7 @@
 from flask import Flask, session, flash, render_template, request, redirect, url_for
 from models import *
 from werkzeug.security import check_password_hash, generate_password_hash
+import sys
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -44,9 +45,10 @@ def furniture():
     return render_template('furniture.html', entries=entries)
 
 
-@app.route('/more_info/<int:entry_id>')
-def more_info(entry_id):
-    entry = Boat.query.filter_by(id=entry_id).first()
+@app.route('/more_info/<string:type>/<int:entry_id>')
+def more_info(entry_id, type):
+    obj = getattr(sys.modules[__name__], type)
+    entry = obj.query.filter_by(id=entry_id).first()
     return render_template('more_info.html', entry=entry)
 
 @app.route('/logout')
@@ -180,7 +182,7 @@ def create_cars_trucks():
 
 @app.route('/create_entry', methods=['GET', 'POST']) 
 def create_entry():
-    return render_template('createEntry.html')
+    return render_template('createEntry.html', username=session["username"])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
