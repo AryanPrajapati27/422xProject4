@@ -20,13 +20,22 @@
     {% endif %}  
     <nav>
       <ul>
-        <li><a href="#">For Sale &darr;</a>
+        <li><a>For Sale</a>
           <ul>
             <li><a href="{{ url_for('cars_trucks') }}">Cars/Trucks</a></li>
             <li><a href="{{ url_for('motorcycles') }}">Motorcycles</a></li>
             <li><a href="{{ url_for('boats') }}">Boats</a></li>
             <li><a href="{{ url_for('books') }}">Books</a></li>
             <li><a href="{{ url_for('furniture') }}">Furniture</a></li>
+          </ul>
+        </li>
+        <li><a>Housing</a>
+          <ul>
+            <li><a href="{{ url_for('apartments') }}">Apartments</a></li>
+            <li><a href="{{ url_for('houses') }}">Houses</a></li>
+            <li><a href="{{ url_for('condos') }}">Condos</a></li>
+            <li><a href="{{ url_for('roomates') }}">Roomates</a></li>
+            <li><a href="{{ url_for('vacation') }}">Vacation</a></li>
           </ul>
         </li>
       </ul>

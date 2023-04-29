@@ -13,43 +13,66 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    entries = Boat.query.all()
     if 'username' in session:
-        return render_template('home.html', username=session["username"], entries=entries)
+        return render_template('home.html', username=session["username"])
     else:
-        return render_template('home.html', entries=entries)
+        return render_template('home.html')
 
 @app.route('/for_sale/cars_trucks')
 def cars_trucks():
     entries = Cars_Trucks.query.all()
-    return render_template('cars_trucks.html', entries=entries)
+    return render_template('cars_trucks.html', username=session["username"], entries=entries)
 
 @app.route('/for_sale/motorcycles')
 def motorcycles():
     entries = Motorcycles.query.all()
-    return render_template('motorcycles.html', entries=entries)
+    return render_template('motorcycles.html', username=session["username"], entries=entries)
 
 @app.route('/for_sale/boats')
 def boats():
     entries = Boat.query.all()
-    return render_template('boats.html', entries=entries)
+    return render_template('boats.html', username=session["username"], entries=entries)
 
 @app.route('/for_sale/books')
 def books():
     entries = Books.query.all()
-    return render_template('books.html', entries=entries)
+    return render_template('books.html', username=session["username"], entries=entries)
 
 @app.route('/for_sale/furniture')
 def furniture():
     entries = Furniture.query.all()
-    return render_template('furniture.html', entries=entries)
+    return render_template('furniture.html', username=session["username"], entries=entries)
+#####
+@app.route('/housing/apartments')
+def apartments():
+    entries = Apartments.query.all()
+    return render_template('apartments.html', username=session["username"], entries=entries)
 
+@app.route('/housing/houses')
+def houses():
+    entries = Houses.query.all()
+    return render_template('houses.html', username=session["username"], entries=entries)
+
+@app.route('/housing/condos')
+def condos():
+    entries = Condos.query.all()
+    return render_template('condos.html', username=session["username"], entries=entries)
+
+@app.route('/housing/roomates')
+def roomates():
+    entries = Roomates.query.all()
+    return render_template('roomates.html', username=session["username"], entries=entries)
+
+@app.route('/housing/vacation')
+def vacation():
+    entries = Vacation.query.all()
+    return render_template('vacation.html', username=session["username"], entries=entries)
 
 @app.route('/more_info/<string:type>/<int:entry_id>')
 def more_info(entry_id, type):
     obj = getattr(sys.modules[__name__], type)
     entry = obj.query.filter_by(id=entry_id).first()
-    return render_template('more_info.html', entry=entry)
+    return render_template('more_info.html', username=session["username"], entry=entry)
 
 @app.route('/logout')
 def logout():

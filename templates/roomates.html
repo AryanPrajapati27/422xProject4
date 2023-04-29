@@ -14,7 +14,7 @@
     </style>
   </head>
   <body>
-    <h2>Book Entries:</h2>
+    <h2>Roomate Entries:</h2>
     <div class="nav">
         {% if username %}
           <a href="{{ url_for('home') }}">Home</a>
@@ -27,7 +27,7 @@
       </div>
     <ul>
       {% for entry in entries %}
-        <li><a href="{{ url_for('more_info', entry_id=entry.id, type=entry.__class__.__name__) }}">{{ entry.make_model }} ({{ entry.year_built }})</a></li>
+        <li><a href="{{ url_for('more_info', entry_id=entry.id, type=entry.__class__.__name__)  }}">{{ entry.title }}</a></li>
       {% endfor %}
     </ul>
   </body>

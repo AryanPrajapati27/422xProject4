@@ -90,11 +90,95 @@ class Furniture(db.Model):
     phone_number = db.Column(db.String(20))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('furniture', lazy=True))
-
+     
     def __repr__(self):
         return f'<Entry {self.name}>'
 
+class Apartments(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    bedrooms = db.Column(db.Integer)
+    bathrooms = db.Column(db.Integer)
+    square_footage = db.Column(db.Integer)
+    monthly_rent = db.Column(db.Integer)
+    description = db.Column(db.String(200))
+    amenities = db.Column(db.String(200))
+    city = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('apartments', lazy=True))
 
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+class Condos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    bedrooms = db.Column(db.Integer)
+    bathrooms = db.Column(db.Integer)
+    square_footage = db.Column(db.Integer)
+    price = db.Column(db.Integer)
+    hoa_fees = db.Column(db.Integer)
+    description = db.Column(db.String(200))
+    amenities = db.Column(db.String(200))
+    city = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('condos', lazy=True))
+
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+class Houses(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    bedrooms = db.Column(db.Integer)
+    bathrooms = db.Column(db.Integer)
+    square_footage = db.Column(db.Integer)
+    lot_size = db.Column(db.Integer)
+    price = db.Column(db.Integer)
+    description = db.Column(db.String(200))
+    city = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('houses', lazy=True))
+
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+    
+class Roomates(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    rooms = db.Column(db.Integer)
+    preferences = db.Column(db.String(200))
+    bathrooms = db.Column(db.Integer)
+    shared_spaces = db.Column(db.String(200))
+    monthly_rate = db.Column(db.Integer)
+    description = db.Column(db.String(200))
+    city = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('roomates', lazy=True))
+
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+class Vacation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    bedrooms = db.Column(db.Integer)
+    bathrooms = db.Column(db.Integer)
+    amenities = db.Column(db.String(200))
+    nightly_rate = db.Column(db.Integer)
+    minimum_stay = db.Column(db.Integer)
+    description = db.Column(db.String(200))
+    city = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('vacation', lazy=True))
+
+    def __repr__(self):
+        return f'<Entry {self.title}>'
 
 def init_app(app):
     db.init_app(app)

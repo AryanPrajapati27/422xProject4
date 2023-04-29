@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Classified Ads - {{ entry.make_model }}</title>
+    <title>Classified Ads</title>
+    <style>
+      .nav {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      .nav a {
+        margin-left: 10px;
+      }
+    </style>
   </head>
   <body>
-    <h1>{{ entry.make_model }} ({{ entry.year_built }})</h1>
-    <ul>
-      <li>Color: {{ entry.color }}</li>
-      <li>Type: {{ entry.type }}</li>
-      <li>Condition: {{ entry.condition }}</li>
-      <li>Price: ${{ entry.price }}</li>
-      <li>Description: {{ entry.description }}</li>
-      <li>City: {{ entry.city }}</li>
-      <li>Phone Number: {{ entry.phone_number }}</li>
-    </ul>
+    <h1>{{ entry.__class__.__name__ }}</h1>
+    <div class="nav">
+      {% if username %}
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('create_entry') }}">Create Entry</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </div>
+    <table>
+      {% for key, value in entry.__dict__.items() %}
+        {% if key not in ['id', 'user', 'user_id', '_sa_instance_state', 'title'] %}
+          <tr>
+            <th>{{ key }}</th>
+            <td>{{ value }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
   </body>
 </html>

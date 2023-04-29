@@ -14,7 +14,17 @@
     </style>
   </head>
   <body>
-    <h2>Entries:</h2>
+    <h2>Boat Entries:</h2>
+    <div class="nav">
+        {% if username %}
+          <a href="{{ url_for('home') }}">Home</a>
+          <a href="{{ url_for('create_entry') }}">Create Entry</a>
+          <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Login</a>
+          <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+      </div>
     <ul>
       {% for entry in entries %}
         <li><a href="{{ url_for('more_info', entry_id=entry.id, type=entry.__class__.__name__)  }}">{{ entry.make_model }} ({{ entry.year_built }})</a></li>
