@@ -21,57 +21,80 @@ def home():
 @app.route('/for_sale/cars_trucks')
 def cars_trucks():
     entries = Cars_Trucks.query.all()
+    if 'username' not in session:
+        return render_template('cars_trucks.html', entries=entries)
     return render_template('cars_trucks.html', username=session["username"], entries=entries)
 
 @app.route('/for_sale/motorcycles')
 def motorcycles():
     entries = Motorcycles.query.all()
+    if 'username' not in session:
+        return render_template('motorcycles.html', entries=entries)
     return render_template('motorcycles.html', username=session["username"], entries=entries)
 
 @app.route('/for_sale/boats')
 def boats():
     entries = Boat.query.all()
+    if 'username' not in session:
+        return render_template('boats.html', entries=entries)
     return render_template('boats.html', username=session["username"], entries=entries)
 
 @app.route('/for_sale/books')
 def books():
     entries = Books.query.all()
+    if 'username' not in session:
+        return render_template('books.html', entries=entries)
     return render_template('books.html', username=session["username"], entries=entries)
 
 @app.route('/for_sale/furniture')
 def furniture():
     entries = Furniture.query.all()
+    if 'username' not in session:
+        return render_template('furniture.html', entries=entries)
     return render_template('furniture.html', username=session["username"], entries=entries)
 #####
 @app.route('/housing/apartments')
 def apartments():
     entries = Apartments.query.all()
+    if 'username' not in session:
+        return render_template('apartments.html', entries=entries)
     return render_template('apartments.html', username=session["username"], entries=entries)
 
 @app.route('/housing/houses')
 def houses():
     entries = Houses.query.all()
+    if 'username' not in session:
+        return render_template('houses.html', entries=entries)
     return render_template('houses.html', username=session["username"], entries=entries)
 
 @app.route('/housing/condos')
 def condos():
     entries = Condos.query.all()
+    if 'username' not in session:
+        return render_template('condos.html', entries=entries)
     return render_template('condos.html', username=session["username"], entries=entries)
 
 @app.route('/housing/roomates')
 def roomates():
     entries = Roomates.query.all()
+    if 'username' not in session:
+        return render_template('roomates.html', entries=entries)
     return render_template('roomates.html', username=session["username"], entries=entries)
 
 @app.route('/housing/vacation')
 def vacation():
     entries = Vacation.query.all()
+    if 'username' not in session:
+        return render_template('vacation.html', entries=entries)
+
     return render_template('vacation.html', username=session["username"], entries=entries)
 
 @app.route('/more_info/<string:type>/<int:entry_id>')
 def more_info(entry_id, type):
     obj = getattr(sys.modules[__name__], type)
     entry = obj.query.filter_by(id=entry_id).first()
+    if 'username' not in session:
+        return render_template('more_info.html', entry=entry)
     return render_template('more_info.html', username=session["username"], entry=entry)
 
 @app.route('/logout')
@@ -202,6 +225,135 @@ def create_cars_trucks():
         return redirect(url_for('home'))
 
     return render_template('createEntry.html')
+
+@app.route('/create_apartment', methods=['GET', 'POST'])
+def create_apartment():
+    if request.method == 'POST':
+        title = request.form['title']
+        bedrooms = request.form['bedrooms']
+        bathrooms = request.form['bathrooms']
+        square_footage = request.form['square_footage']
+        monthly_rent = request.form['monthly_rent']
+        description = request.form['description']
+        amenities = request.form['amenities']
+        city = request.form['city']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Apartments(title=title, bedrooms=bedrooms, bathrooms=bathrooms,
+                    square_footage=square_footage, monthly_rent=monthly_rent,
+                    description=description, amenities=amenities, city=city,
+                    phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('createEntry.html')
+
+@app.route('/create_condo', methods=['GET', 'POST'])
+def create_condo():
+    if request.method == 'POST':
+        title = request.form['title']
+        bedrooms = request.form['bedrooms']
+        bathrooms = request.form['bathrooms']
+        square_footage = request.form['square_footage']
+        price = request.form['price']
+        hoa_fees = request.form['hoa_fees']
+        description = request.form['description']
+        amenities = request.form['amenities']
+        city = request.form['city']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Condos(title=title, bedrooms=bedrooms, bathrooms=bathrooms,
+                       square_footage=square_footage, price=price, hoa_fees=hoa_fees,
+                       description=description, amenities=amenities, city=city,
+                       phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('create_condo.html')
+
+@app.route('/create_house', methods=['GET', 'POST'])
+def create_house():
+    if request.method == 'POST':
+        title = request.form['title']
+        bedrooms = request.form['bedrooms']
+        bathrooms = request.form['bathrooms']
+        square_footage = request.form['square_footage']
+        lot_size = request.form['lot_size']
+        price = request.form['price']
+        description = request.form['description']
+        city = request.form['city']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Houses(title=title, bedrooms=bedrooms, bathrooms=bathrooms,
+                       square_footage=square_footage, lot_size=lot_size, price=price,
+                       description=description, city=city, phone_number=phone_number,
+                       user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('create_house.html')
+
+@app.route('/create_roomate', methods=['GET', 'POST'])
+def create_roomate():
+    if request.method == 'POST':
+        title = request.form['title']
+        rooms = request.form['rooms']
+        preferences = request.form['preferences']
+        bathrooms = request.form['bathrooms']
+        shared_spaces = request.form['shared_spaces']
+        monthly_rate = request.form['monthly_rate']
+        description = request.form['description']
+        city = request.form['city']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Roomates(title=title, rooms=rooms, preferences=preferences,
+                       bathrooms=bathrooms, shared_spaces=shared_spaces, monthly_rate=monthly_rate,
+                       description=description, city=city, phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('create_roomate.html')
+
+@app.route('/create_vacation', methods=['GET', 'POST'])
+def create_vacation():
+    if request.method == 'POST':
+        title = request.form['title']
+        bedrooms = request.form['bedrooms']
+        bathrooms = request.form['bathrooms']
+        amenities = request.form['amenities']
+        nightly_rate = request.form['nightly_rate']
+        minimum_stay = request.form['minimum_stay']
+        description = request.form['description']
+        city = request.form['city']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Vacation(title=title, bedrooms=bedrooms, bathrooms=bathrooms,
+                         amenities=amenities, nightly_rate=nightly_rate, minimum_stay=minimum_stay,
+                         description=description, city=city, phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('create_vacation.html')
 
 @app.route('/create_entry', methods=['GET', 'POST']) 
 def create_entry():

@@ -40,18 +40,64 @@
     </div>
     <div id = "selector" style="display: block;">
       <form method="post">
-        <label>For Sale:</label>
+        <table>
+          <tr>
+            <th>For Sale:</th>
+            <th>Housing:</th>
+          </tr>
+          <tr>
+            <td>
+              <input type="radio" id="cars_trucks" name="for_sale" value="cars_trucks">
+              <label for="cars_trucks">Cars/Trucks</label><br>
+            </td>
+            <td>
+              <input type="radio" id="apartments" name="for_sale" value="apartments">
+              <label for="apartments">Apartments</label><br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="radio" id="motorcycles" name="for_sale" value="motorcycles">
+              <label for="motorcycles">Motorcycles</label><br>
+            </td>
+            <td>
+              <input type="radio" id="condos" name="for_sale" value="condos">
+              <label for="condos">Condos</label><br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="radio" id="boats" name="for_sale" value="boats">
+              <label for="boats">Boats</label><br>
+            </td>
+            <td>
+              <input type="radio" id="houses" name="for_sale" value="houses">
+              <label for="houses">Houses</label><br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="radio" id="books" name="for_sale" value="books">
+              <label for="books">Books</label><br>
+            </td>
+            <td>
+              <input type="radio" id="roomates" name="for_sale" value="roomates">
+              <label for="roomates">Roomates</label><br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="radio" id="furniture" name="for_sale" value="furniture">
+              <label for="furniture">Furniture</label>
+            </td>
+            <td>
+              <input type="radio" id="vacation" name="for_sale" value="vacation">
+              <label for="vacation">Vacation</label><br>
+            </td>
+          </tr>
+        </table>
         <br>
-        <input type="radio" id="cars_trucks" name="for_sale" value="cars_trucks">
-        <label for="cars_trucks">Cars/Trucks</label><br>
-        <input type="radio" id="motorcycles" name="for_sale" value="motorcycles">
-        <label for="motorcycles">Motorcycles</label><br>
-        <input type="radio" id="boats" name="for_sale" value="boats">
-        <label for="boats">Boats</label><br>
-        <input type="radio" id="books" name="for_sale" value="books">
-        <label for="books">Books</label><br>
-        <input type="radio" id="furniture" name="for_sale" value="furniture">
-        <label for="furniture">Furniture</label><br>
+        <br>
         <br>
         <button type="button" onclick="renderForm()">Submit!</button>
       </form>  
@@ -223,6 +269,179 @@
         <input type="submit" value="Create">
       </form>
     </div>
+
+    <div id="apartments-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_apartment') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+    
+        <label for="bedrooms">Bedrooms:</label>
+        <input type="number" id="bedrooms" name="bedrooms" required><br><br>
+    
+        <label for="bathrooms">Bathrooms:</label>
+        <input type="number" id="bathrooms" name="bathrooms" required><br><br>
+    
+        <label for="square-footage">Square Footage:</label>
+        <input type="number" id="square-footage" name="square_footage" required><br><br>
+    
+        <label for="monthly-rent">Monthly Rent:</label>
+        <input type="number" id="monthly-rent" name="monthly_rent" required><br><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="amenities">Amenities:</label>
+        <textarea id="amenities" name="amenities" rows="4" cols="50"></textarea><br><br>
+    
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+    
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+    
+        <input type="submit" value="Create">
+      </form>
+    </div>
+
+    <div id="condos-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_condo') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+    
+        <label for="bedrooms">Bedrooms:</label>
+        <input type="number" id="bedrooms" name="bedrooms" required><br><br>
+    
+        <label for="bathrooms">Bathrooms:</label>
+        <input type="number" id="bathrooms" name="bathrooms" required><br><br>
+    
+        <label for="square-footage">Square Footage:</label>
+        <input type="number" id="square-footage" name="square_footage" required><br><br>
+    
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required><br><br>
+    
+        <label for="hoa-fees">HOA Fees:</label>
+        <input type="number" id="hoa-fees" name="hoa_fees" required><br><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="amenities">Amenities:</label>
+        <textarea id="amenities" name="amenities" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+    
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+    
+        <input type="submit" value="Create">
+      </form>
+    </div>
+
+    <div id="houses-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_house') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+    
+        <label for="bedrooms">Bedrooms:</label>
+        <input type="number" id="bedrooms" name="bedrooms" required><br><br>
+    
+        <label for="bathrooms">Bathrooms:</label>
+        <input type="number" id="bathrooms" name="bathrooms" required><br><br>
+    
+        <label for="square-footage">Square Footage:</label>
+        <input type="number" id="square-footage" name="square_footage" required><br><br>
+    
+        <label for="lot-size">Lot Size:</label>
+        <input type="number" id="lot-size" name="lot_size" required><br><br>
+    
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required><br><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+    
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+    
+        <input type="submit" value="Create">
+      </form>
+    </div>
+    <div id="roomates-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_roomate') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+    
+        <label for="rooms">Rooms:</label>
+        <input type="number" id="rooms" name="rooms" required><br><br>
+    
+        <label for="preferences">Preferences:</label>
+        <textarea id="preferences" name="preferences" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="bathrooms">Bathrooms:</label>
+        <input type="number" id="bathrooms" name="bathrooms" required><br><br>
+    
+        <label for="shared-spaces">Shared Spaces:</label>
+        <textarea id="shared-spaces" name="shared_spaces" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="monthly-rate">Monthly Rate:</label>
+        <input type="number" id="monthly-rate" name="monthly_rate" required><br><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+    
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+    
+        <input type="submit" value="Create">
+      </form>
+    </div>
+    
+    <div id="vacation-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_vacation') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+    
+        <label for="bedrooms">Bedrooms:</label>
+        <input type="number" id="bedrooms" name="bedrooms" required><br><br>
+    
+        <label for="bathrooms">Bathrooms:</label>
+        <input type="number" id="bathrooms" name="bathrooms" required><br><br>
+    
+        <label for="amenities">Amenities:</label>
+        <textarea id="amenities" name="amenities" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="nightly-rate">Nightly Rate:</label>
+        <input type="number" id="nightly-rate" name="nightly_rate" required><br><br>
+    
+        <label for="minimum-stay">Minimum Stay:</label>
+        <input type="number" id="minimum-stay" name="minimum_stay" required><br><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+    
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+    
+        <input type="submit" value="Create">
+      </form>
+    </div>
+    
 
   </body>
 </html>
