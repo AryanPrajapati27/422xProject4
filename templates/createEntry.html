@@ -44,6 +44,7 @@
           <tr>
             <th>For Sale:</th>
             <th>Housing:</th>
+            <th>Jobs:</th>
           </tr>
           <tr>
             <td>
@@ -53,6 +54,10 @@
             <td>
               <input type="radio" id="apartments" name="for_sale" value="apartments">
               <label for="apartments">Apartments</label><br>
+            </td>
+              <td>
+              <input type="radio" id="babysitter" name="for_sale" value="babysitter">
+              <label for="babysitter">Babysitter</label><br>
             </td>
           </tr>
           <tr>
@@ -64,6 +69,10 @@
               <input type="radio" id="condos" name="for_sale" value="condos">
               <label for="condos">Condos</label><br>
             </td>
+            <td>
+              <input type="radio" id="tutor" name="for_sale" value="tutor">
+              <label for="tutor">Tutor</label><br>
+            </td>
           </tr>
           <tr>
             <td>
@@ -73,6 +82,10 @@
             <td>
               <input type="radio" id="houses" name="for_sale" value="houses">
               <label for="houses">Houses</label><br>
+            </td>
+              <td>
+              <input type="radio" id="moving" name="for_sale" value="moving">
+              <label for="moving">Moving</label><br>
             </td>
           </tr>
           <tr>
@@ -84,6 +97,10 @@
               <input type="radio" id="roomates" name="for_sale" value="roomates">
               <label for="roomates">Roomates</label><br>
             </td>
+             <td>
+              <input type="radio" id="webdesign" name="for_sale" value="webdesign">
+              <label for="webdesign">Web Design</label><br>
+            </td>
           </tr>
           <tr>
             <td>
@@ -93,6 +110,10 @@
             <td>
               <input type="radio" id="vacation" name="for_sale" value="vacation">
               <label for="vacation">Vacation</label><br>
+            </td>
+             <td>
+              <input type="radio" id="foodservice" name="for_sale" value="foodservice">
+              <label for="foodservice">Food Service</label><br>
             </td>
           </tr>
         </table>
@@ -442,7 +463,141 @@
       </form>
     </div>
     
+    <div id="babysitter-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_babysitter') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
 
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required><br><br>
+
+        <label for="pay">Pay:</label>
+        <input type="number" id="pay" name="pay" required><br><br>
+
+        <label for="serviceterm">Service Term:</label>
+        <input type="text" id="serviceterm" name="serviceterm" required><br><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br><br>
+
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+
+        <input type="submit" value="Create">
+      </form>
+    </div>
+      <div id="tutor-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_tutor') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required><br><br>
+
+        <label for="pay">Pay:</label>
+        <input type="number" id="pay" name="pay" required><br><br>
+
+        <label for="serviceterm">Service Term:</label>
+        <input type="text" id="serviceterm" name="serviceterm" required><br><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br><br>
+
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+
+        <input type="submit" value="Create">
+      </form>
+    </div>
+        <div id="moving-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_moving') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required><br><br>
+
+        <label for="pay">Pay:</label>
+        <input type="number" id="pay" name="pay" required><br><br>
+
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" required><br><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br><br>
+
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+
+        <input type="submit" value="Create">
+      </form>
+    </div>
+        <div id="webdesign-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_webdesign') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required><br><br>
+
+        <label for="pay">Pay:</label>
+        <input type="number" id="pay" name="pay" required><br><br>
+
+        <label for="serviceterm">Service Term:</label>
+        <input type="text" id="serviceterm" name="serviceterm" required><br><br>
+
+        <label for="languages">Languages:</label>
+        <input type="text" id="languages" name="languages" required><br><br>
+
+        <label for="requirments">Requirments:</label>
+        <input type="text" id="requirments" name="requirments" required><br><br>
+
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+
+        <input type="submit" value="Create">
+      </form>
+    </div>
+          <div id="foodservice-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_foodservice') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required><br><br>
+
+        <label for="pay">Pay:</label>
+        <input type="number" id="pay" name="pay" required><br><br>
+
+        <label for="serviceterm">Service Term:</label>
+        <input type="text" id="serviceterm" name="serviceterm" required><br><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br><br>
+
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+
+        <input type="submit" value="Create">
+      </form>
+    </div>
   </body>
 </html>
 

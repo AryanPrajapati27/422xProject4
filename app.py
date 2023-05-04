@@ -89,6 +89,42 @@ def vacation():
 
     return render_template('vacation.html', username=session["username"], entries=entries)
 
+@app.route('/jobs/babysitter')
+def babysitter():
+    entries = Babysitter.query.all()
+    if 'username' not in session:
+        return render_template('babysitter.html', entries=entries)
+
+    return render_template('babysitter.html', username=session["username"], entries=entries)
+@app.route('/jobs/tutor')
+def tutor():
+    entries = Tutor.query.all()
+    if 'username' not in session:
+        return render_template('tutor.html', entries=entries)
+
+    return render_template('tutor.html', username=session["username"], entries=entries)
+@app.route('/jobs/moving')
+def moving():
+    entries = Moving.query.all()
+    if 'username' not in session:
+        return render_template('moving.html', entries=entries)
+
+    return render_template('moving.html', username=session["username"], entries=entries)
+@app.route('/jobs/webdesign')
+def webdesign():
+    entries = Webdesign.query.all()
+    if 'username' not in session:
+        return render_template('webdesign.html', entries=entries)
+
+    return render_template('webdesign.html', username=session["username"], entries=entries)
+@app.route('/jobs/foodservice')
+def foodservice():
+    entries = Foodservice.query.all()
+    if 'username' not in session:
+        return render_template('foodservice.html', entries=entries)
+
+    return render_template('foodservice.html', username=session["username"], entries=entries)
+
 @app.route('/more_info/<string:type>/<int:entry_id>')
 def more_info(entry_id, type):
     obj = getattr(sys.modules[__name__], type)
@@ -354,7 +390,119 @@ def create_vacation():
         return redirect(url_for('home'))
 
     return render_template('create_vacation.html')
+@app.route('/create_babysitter', methods=['GET', 'POST'])
+def create_babysitter():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        pay = request.form['pay']
+        serviceTerm = request.form['serviceterm']
+        city = request.form['city']
+        state = request.form['state']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Babysitter(title=title, description=description, pay=pay,
+                         serviceTerm=serviceTerm, city=city, state=state,
+                         phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
 
+    return render_template('create_babysitter.html')
+@app.route('/create_tutor', methods=['GET', 'POST'])
+def create_tutor():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        pay = request.form['pay']
+        serviceTerm = request.form['serviceterm']
+        city = request.form['city']
+        state = request.form['state']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Tutor(title=title, description=description, pay=pay,
+                         serviceTerm=serviceTerm, city=city, state=state,
+                         phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('create_tutor.html')
+
+@app.route('/create_moving', methods=['GET', 'POST'])
+def create_moving():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        pay = request.form['pay']
+        date = request.form['date']
+        city = request.form['city']
+        state = request.form['state']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Moving(title=title, description=description, pay=pay,
+                         date=date, city=city, state=state,
+                         phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('create_moving.html')
+
+@app.route('/create_webdesign', methods=['GET', 'POST'])
+def create_webdesign():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        pay = request.form['pay']
+        serviceterm = request.form['serviceterm']
+        languages = request.form['languages']
+        requirments = request.form['requirments']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Webdesign(title=title, description=description, pay=pay,
+                         serviceterm=serviceterm, languages=languages, requirments=requirments,
+                         phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('create_webdesign.html')
+
+@app.route('/create_foodservice', methods=['GET', 'POST'])
+def create_foodservice():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        pay = request.form['pay']
+        serviceterm = request.form['serviceterm']
+        city = request.form['city']
+        state = request.form['state']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Foodservice(title=title, description=description, pay=pay,
+                         serviceterm=serviceterm, city=city, state=state,
+                         phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+
+    return render_template('create_foodservice.html')
 @app.route('/create_entry', methods=['GET', 'POST']) 
 def create_entry():
     return render_template('createEntry.html', username=session["username"])
