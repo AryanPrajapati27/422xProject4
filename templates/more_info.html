@@ -27,7 +27,7 @@
     </div>
     <table>
       {% for key, value in entry.__dict__.items() %}
-        {% if key not in ['id', 'user', 'user_id', '_sa_instance_state', 'title'] %}
+        {% if key not in ['id', 'user', 'user_id', '_sa_instance_state'] %}
           <tr>
             <th>{{ key }}</th>
             <td>{{ value }}</td>
