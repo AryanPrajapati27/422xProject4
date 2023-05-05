@@ -163,7 +163,46 @@ def techservice():
         return render_template('techservice.html', entries=entries)
 
     return render_template('techservice.html', username=session["username"], entries=entries)
+####
+@app.route('/community/event')
+def event():
+    entries = Event.query.all()
+    if 'username' not in session:
+        return render_template('event.html', entries=entries)
 
+    return render_template('event.html', username=session["username"], entries=entries)
+
+@app.route('/community/group')
+def group():
+    entries = Group.query.all()
+    if 'username' not in session:
+        return render_template('group.html', entries=entries)
+
+    return render_template('group.html', username=session["username"], entries=entries)
+
+@app.route('/community/lostfound')
+def lostfound():
+    entries = LostFound.query.all()
+    if 'username' not in session:
+        return render_template('lostfound.html', entries=entries)
+
+    return render_template('lostfound.html', username=session["username"], entries=entries)
+
+@app.route('/community/volunteer')
+def volunteer():
+    entries = Volunteer.query.all()
+    if 'username' not in session:
+        return render_template('volunteer.html', entries=entries)
+
+    return render_template('volunteer.html', username=session["username"], entries=entries)
+
+@app.route('/community/general')
+def general():
+    entries = General.query.all()
+    if 'username' not in session:
+        return render_template('general.html', entries=entries)
+
+    return render_template('general.html', username=session["username"], entries=entries)
 
 @app.route('/more_info/<string:type>/<int:entry_id>')
 def more_info(entry_id, type):
@@ -668,13 +707,127 @@ def create_techservice():
         return redirect(url_for('home'))
     return render_template('create_techservice.html')
 
+@app.route('/create_event', methods=['GET', 'POST'])
+def create_event():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        date = request.form['date']
+        time = request.form['time']
+        location = request.form['location']
+        organizer_name = request.form['organizer_name']
+        organizer_contact = request.form['organizer_contact']
+        phone_number = request.form['phone_number']
+        price = request.form['price']
+        capacity = request.form['capacity']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Event(title=title, description=description, date=date, time=time, location=location,
+                      organizer_name=organizer_name, organizer_contact=organizer_contact, phone_number=phone_number,
+                      price=price, capacity=capacity, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New event was successfully created.')
+        return redirect(url_for('home'))
 
+    return render_template('create_event.html')
 
+@app.route('/create_group', methods=['GET', 'POST'])
+def create_group():
+    if request.method == 'POST':
+        title = request.form['title']
+        group_type = request.form['group_type']
+        description = request.form['description']
+        meeting_time = request.form['meeting_time']
+        meeting_location = request.form['meeting_location']
+        contact_info = request.form['contact_info']
+        size = request.form['size']
+        membership_fee = request.form['membership_fee']
+        membership_requirements = request.form['membership_requirements']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Group(title=title, group_type=group_type, description=description,
+                      meeting_time=meeting_time, meeting_location=meeting_location,
+                      contact_info=contact_info, size=size, membership_fee=membership_fee,
+                      membership_requirements=membership_requirements, phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+    return render_template('create_group.html')
 
+@app.route('/create_lostfound', methods=['GET', 'POST'])
+def create_lostfound():
+    if request.method == 'POST':
+        title = request.form['title']
+        item_type = request.form['item_type']
+        description = request.form['description']
+        location = request.form['location']
+        date_lost_found = request.form['date_lost_found']
+        contact_info = request.form['contact_info']
+        image_url = request.form['image_url']
+        status = request.form['status']
+        phone_number = request.form['phone_number']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = LostFound(title=title, item_type=item_type, description=description, location=location,
+                          date_lost_found=date_lost_found, contact_info=contact_info, image_url=image_url,
+                          status=status, phone_number=phone_number, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+    return render_template('create_lostfound.html')
 
+@app.route('/create_volunteer', methods=['GET', 'POST'])
+def create_volunteer():
+    if request.method == 'POST':
+        title = request.form['title']
+        email = request.form['email']
+        phone_number = request.form['phone_number']
+        location = request.form['location']
+        skills = request.form['skills']
+        interests = request.form['interests']
+        availability = request.form['availability']
+        experience = request.form['experience']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Volunteer(title=title, email=email, phone_number=phone_number, location=location, 
+                          skills=skills, interests=interests, availability=availability, experience=experience,
+                          user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+    return render_template('create_volunteer.html')
 
-
-
+@app.route('/create_general', methods=['GET', 'POST'])
+def create_general():
+    if request.method == 'POST':
+        title = request.form['title']
+        category = request.form['category']
+        description = request.form['description']
+        location = request.form['location']
+        price = request.form['price']
+        contact_info = request.form['contact_info']
+        image_url = request.form['image_url']
+        phone_number = request.form['phone_number']
+        tags = request.form['tags']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()    
+        entry = General(title=title, category=category, description=description, location=location, price=price,
+                        contact_info=contact_info, image_url=image_url, phone_number=phone_number, tags=tags, user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+    return render_template('create_general.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

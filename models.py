@@ -326,8 +326,96 @@ class Techservice(db.Model):
     email = db.Column(db.String(20))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('techservice', lazy=True))
+    
     def __repr__(self):
         return f'<Entry {self.title}>'
+    
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    date = db.Column(db.String(20))
+    time = db.Column(db.String(20))
+    location = db.Column(db.String(50))
+    organizer_name = db.Column(db.String(50))
+    organizer_contact = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    price = db.Column(db.Integer)
+    capacity = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('event', lazy=True))
+
+    def __repr__(self):
+        return f'<Event {self.title}>'
+
+class Group(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    group_type = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    meeting_time = db.Column(db.String(20))
+    meeting_location = db.Column(db.String(50))
+    contact_info = db.Column(db.String(50))
+    size = db.Column(db.Integer)
+    membership_fee = db.Column(db.Integer)
+    membership_requirements = db.Column(db.String(200))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('group', lazy=True))
+
+    def __repr__(self):
+        return f'<Group {self.name}>'
+
+class LostFound(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    item_type = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    location = db.Column(db.String(50))
+    date_lost_found = db.Column(db.String(20))
+    contact_info = db.Column(db.String(50))
+    image_url = db.Column(db.String(100))
+    status = db.Column(db.String(20))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('lostfound', lazy=True))
+
+    def __repr__(self):
+        return f'<LostFound {self.item_name}>'
+
+class Volunteer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    email = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    location = db.Column(db.String(50))
+    skills = db.Column(db.String(200))
+    interests = db.Column(db.String(200))
+    availability = db.Column(db.String(100))
+    experience = db.Column(db.String(200))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('volunteers', lazy=True))
+
+    def __repr__(self):
+        return f'<Volunteer {self.name}>'
+
+class General(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    category = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    location = db.Column(db.String(50))
+    price = db.Column(db.Integer)
+    contact_info = db.Column(db.String(50))
+    image_url = db.Column(db.String(100))
+    phone_number = db.Column(db.String(20))
+    tags = db.Column(db.String(200))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('generals', lazy=True))
+
+    def __repr__(self):
+        return f'<General {self.title}>'
 
 
 def init_app(app):
