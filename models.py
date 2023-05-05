@@ -179,6 +179,75 @@ class Vacation(db.Model):
 
     def __repr__(self):
         return f'<Entry {self.title}>'
+class Babysitter(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    pay = db.Column(db.Integer)
+    serviceTerm = db.Column(db.String(100))
+    city = db.Column(db.String(50))
+    state = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('babysitter', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+class Tutor(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    pay = db.Column(db.Integer)
+    serviceTerm = db.Column(db.String(100))
+    city = db.Column(db.String(50))
+    state = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('tutor', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+
+class Moving(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    pay = db.Column(db.Integer)
+    date = db.Column(db.String(100))
+    city = db.Column(db.String(50))
+    state = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('moving', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+class Webdesign(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    pay = db.Column(db.Integer)
+    serviceterm = db.Column(db.String(100))
+    languages = db.Column(db.String(50))
+    requirments = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('webdesign', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+class Foodservice(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    pay = db.Column(db.Integer)
+    serviceterm = db.Column(db.String(100))
+    city = db.Column(db.String(50))
+    state = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('foodservice', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
 
 def init_app(app):
     db.init_app(app)
