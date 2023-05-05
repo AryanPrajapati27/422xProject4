@@ -124,6 +124,46 @@ def foodservice():
         return render_template('foodservice.html', entries=entries)
 
     return render_template('foodservice.html', username=session["username"], entries=entries)
+@app.route('/services/homeservice')
+def homeservice():
+    entries = Homeservice.query.all()
+    if 'username' not in session:
+        return render_template('homeservice.html', entries=entries)
+
+    return render_template('homeservice.html', username=session["username"], entries=entries)
+
+@app.route('/services/transportservice')
+def transportservice():
+    entries = Transportservice.query.all()
+    if 'username' not in session:
+        return render_template('transportservice.html', entries=entries)
+
+    return render_template('transportservice.html', username=session["username"], entries=entries)
+
+@app.route('/services/hygieneservice')
+def hygieneservice():
+    entries = Hygieneservice.query.all()
+    if 'username' not in session:
+        return render_template('hygieneservice.html', entries=entries)
+
+    return render_template('hygieneservice.html', username=session["username"], entries=entries)
+
+@app.route('/services/eventservice')
+def eventservice():
+    entries = Eventservice.query.all()
+    if 'username' not in session:
+        return render_template('eventservice.html', entries=entries)
+
+    return render_template('eventservice.html', username=session["username"], entries=entries)
+
+@app.route('/services/techservice')
+def techservice():
+    entries = Techservice.query.all()
+    if 'username' not in session:
+        return render_template('techservice.html', entries=entries)
+
+    return render_template('techservice.html', username=session["username"], entries=entries)
+
 
 @app.route('/more_info/<string:type>/<int:entry_id>')
 def more_info(entry_id, type):
@@ -506,6 +546,135 @@ def create_foodservice():
 @app.route('/create_entry', methods=['GET', 'POST']) 
 def create_entry():
     return render_template('createEntry.html', username=session["username"])
+
+@app.route('/create_homeservice', methods =['GET','POST'])
+def create_homeservice():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        price = request.form['price']
+        availability = request.form['availability']
+        service_location =request.form['service_location']
+        phone_number = request.form['phone_number']
+        email = request.form['email']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Homeservice(title=title,description=description,price=price,
+                        availability=availability,service_location=service_location,
+                        phone_number=phone_number,email=email,user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+    return render_template('create_homeservice.html')
+
+@app.route('/create_transportservice', methods =['GET','POST'])
+def create_transportservice():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        price_per_mile = request.form['price_per_mile']
+        availability = request.form['availability']
+        service_coverage_area = request.form['service_coverage_area']
+        pick_up_location = request.form['pick_up_location']
+        drop_off_location = request.form['drop_off_location']
+        payment_methods = request.form['payment_methods']
+        phone_number = request.form['phone_number']
+        email = request.form['email']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Transportservice(title=title,description=description,price_per_mile=price_per_mile,
+                        availability=availability,service_coverage_area=service_coverage_area,
+                        pick_up_location=pick_up_location,drop_off_location=drop_off_location,
+                        payment_methods=payment_methods,phone_number=phone_number,email=email,user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+    return render_template('create_transportservice.html')
+
+@app.route('/create_hygieneservice', methods =['GET','POST'])
+def create_hygieneservice():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        price = request.form['price']
+        duration =  request.form['duration']
+        appointment_availability =  request.form['appointment_availability']
+        service_location =  request.form['service_location']
+        phone_number =  request.form['phone_number']
+        email =  request.form['email']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Hygieneservice(title=title,description=description,price=price,duration=duration,
+                        appointment_availability=appointment_availability,service_location=service_location,
+                        phone_number=phone_number,email=email,user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+    return render_template('create_hygieneservice.html')
+
+
+@app.route('/create_eventservice', methods =['GET','POST'])
+def create_eventservice():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        budget = request.form['budget']
+        availability = request.form['availability']
+        event_date = request.form['event_date']
+        guest_count = request.form['guest_count']
+        event_location = request.form['event_location']
+        phone_number = request.form['phone_number']
+        email = request.form['email']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()
+        entry = Eventservice(title=title,description=description,budget=budget,availability=availability,
+                        event_date=event_date,guest_count=guest_count,event_location=event_location,
+                        phone_number=phone_number,email=email,user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+    return render_template('create_eventservice.html')
+
+
+@app.route('/create_techservice', methods =['GET','POST'])
+def create_techservice():
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        price = request.form['price']
+        availability = request.form['availability']
+        service_location = request.form['service_location']
+        skills_and_expertise = request.form['skills_and_expertise']
+        certifications = request.form['certifications']
+        phone_number = request.form['phone_number']
+        email = request.form['email']
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        user = User.query.filter_by(username=session['username']).first()    
+        entry = Techservice(title=title,description=description,price=price,availability=availability,
+                        service_location=service_location,skills_and_expertise=skills_and_expertise,
+                        certifications=certifications,phone_number=phone_number,email=email,user=user)
+        db.session.add(entry)
+        db.session.commit()
+        flash('New entry was successfully created.')
+        return redirect(url_for('home'))
+    return render_template('create_techservice.html')
+
+
+
+
+
+
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

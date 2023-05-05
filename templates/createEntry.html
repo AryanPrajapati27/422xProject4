@@ -45,6 +45,7 @@
             <th>For Sale:</th>
             <th>Housing:</th>
             <th>Jobs:</th>
+            <th>Services</th>
           </tr>
           <tr>
             <td>
@@ -58,6 +59,10 @@
               <td>
               <input type="radio" id="babysitter" name="for_sale" value="babysitter">
               <label for="babysitter">Babysitter</label><br>
+            </td>
+            <td>
+              <input type="radio" id="homeservice" name="for_sale" value="homeservice">
+              <label for="homeservice">Home Service</label><br>
             </td>
           </tr>
           <tr>
@@ -73,6 +78,10 @@
               <input type="radio" id="tutor" name="for_sale" value="tutor">
               <label for="tutor">Tutor</label><br>
             </td>
+            <td>
+              <input type="radio" id="transportservice" name="for_sale" value="transportservice">
+              <label for="transportservice">Transport Service</label><br>
+            </td>
           </tr>
           <tr>
             <td>
@@ -86,6 +95,10 @@
               <td>
               <input type="radio" id="moving" name="for_sale" value="moving">
               <label for="moving">Moving</label><br>
+            </td>
+            <td>
+              <input type="radio" id="hygieneservice" name="for_sale" value="hygieneservice">
+              <label for="hygieneservice">Hygiene Service</label><br>
             </td>
           </tr>
           <tr>
@@ -101,6 +114,10 @@
               <input type="radio" id="webdesign" name="for_sale" value="webdesign">
               <label for="webdesign">Web Design</label><br>
             </td>
+            <td>
+              <input type="radio" id="eventservice" name="for_sale" value="eventservice">
+              <label for="eventservice">Event Service</label><br>
+            </td>
           </tr>
           <tr>
             <td>
@@ -114,6 +131,10 @@
              <td>
               <input type="radio" id="foodservice" name="for_sale" value="foodservice">
               <label for="foodservice">Food Service</label><br>
+            </td>
+            <td>
+              <input type="radio" id="techservice" name="for_sale" value="techservice">
+              <label for="techservice">Tech Service</label><br>
             </td>
           </tr>
         </table>
@@ -595,6 +616,165 @@
         <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         <small>Format: 123-456-7890</small><br><br>
 
+        <input type="submit" value="Create">
+      </form>
+    </div>
+    <div id="homeservice-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_homeservice') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required><br><br>
+    
+        <label for="availability">Availability:</label>
+        <input type="text" id="availability" name="availability" required><br><br>
+    
+        <label for="service-location">Service Location:</label>
+        <input type="text" id="service-location" name="service_location" required><br><br>
+    
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+    
+        <input type="submit" value="Create">
+      </form>
+    </div>
+    <div id="transportservice-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_transportservice') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="price_per_mile">Price per Mile:</label>
+        <input type="number" id="price_per_mile" name="price_per_mile" required><br><br>
+    
+        <label for="availability">Availability:</label>
+        <input type="text" id="availability" name="availability" required><br><br>
+    
+        <label for="service_coverage_area">Service Coverage Area:</label>
+        <input type="text" id="service_coverage_area" name="service_coverage_area" required><br><br>
+    
+        <label for="pick_up_location">Pick-up Location:</label>
+        <input type="text" id="pick_up_location" name="pick_up_location" required><br><br>
+    
+        <label for="drop_off_location">Drop-off Location:</label>
+        <input type="text" id="drop_off_location" name="drop_off_location" required><br><br>
+    
+        <label for="payment_methods">Payment Methods:</label>
+        <input type="text" id="payment_methods" name="payment_methods" required><br><br>
+    
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+    
+        <input type="submit" value="Create">
+      </form>
+    </div>
+    <div id="hygieneservice-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_hygieneservice') }}">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required><br><br>
+          
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+          
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" required><br><br>
+          
+          <label for="duration">Duration:</label>
+          <input type="text" id="duration" name="duration" required><br><br>
+          
+          <label for="appointment-availability">Appointment Availability:</label>
+          <input type="text" id="appointment-availability" name="appointment_availability" required><br><br>
+          
+          <label for="service-location">Service Location:</label>
+          <input type="text" id="service-location" name="service_location" required><br><br>
+          
+          <label for="phone-number">Phone Number:</label>
+          <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+          <small>Format: 123-456-7890</small><br><br>
+          
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required><br><br>
+          
+          <input type="submit" value="Create">
+      </form>
+    </div>
+    <div id="eventservice-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_eventservice') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="budget">Budget:</label>
+        <input type="number" id="budget" name="budget" required><br><br>
+    
+        <label for="availability">Availability:</label>
+        <input type="text" id="availability" name="availability" required><br><br>
+    
+        <label for="event-date">Event Date:</label>
+        <input type="text" id="event-date" name="event_date" required><br><br>
+    
+        <label for="guest-count">Guest Count:</label>
+        <input type="number" id="guest-count" name="guest_count" required><br><br>
+    
+        <label for="event-location">Event Location:</label>
+        <input type="text" id="event-location" name="event_location" required><br><br>
+    
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+    
+        <input type="submit" value="Create">
+      </form>
+    </div>
+    <div id="techservice-form" style="display: none;">
+      <form method="POST" action="{{ url_for('create_techservice') }}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+    
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required><br><br>
+    
+        <label for="availability">Availability:</label>
+        <input type="text" id="availability" name="availability" required><br><br>
+    
+        <label for="service-location">Service Location:</label>
+        <input type="text" id="service-location" name="service_location" required><br><br>
+    
+        <label for="skills-and-expertise">Skills and Expertise:</label>
+        <input type="text" id="skills-and-expertise" name="skills_and_expertise" required><br><br>
+    
+        <label for="certifications">Certifications:</label>
+        <input type="text" id="certifications" name="certifications" required><br><br>
+    
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <small>Format: 123-456-7890</small><br><br>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+    
         <input type="submit" value="Create">
       </form>
     </div>

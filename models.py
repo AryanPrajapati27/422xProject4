@@ -249,5 +249,86 @@ class Foodservice(db.Model):
     def __repr__(self):
         return f'<Entry {self.title}>'
 
+class Homeservice(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    price = db.Column(db.Integer)
+    availability =db.Column(db.String(100))
+    service_location = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    email = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('homeservice', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+class Transportservice(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    price_per_mile = db.Column(db.Integer)
+    availability =db.Column(db.String(100))
+    service_coverage_area = db.Column(db.String(100))
+    pick_up_location = db.Column(db.String(50))
+    drop_off_location = db.Column(db.String(50))
+    payment_methods = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    email = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('transportservice', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+class Hygieneservice(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    price = db.Column(db.Integer)
+    duration = db.Column(db.String(20))
+    appointment_availability =db.Column(db.String(100))
+    service_location = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    email = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('hygieneservice', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+
+class Eventservice(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    budget = db.Column(db.Integer)
+    availability =db.Column(db.String(100))
+    event_date = db.Column(db.String(50))
+    guest_count = db.Column(db.Integer)
+    event_location = db.Column(db.String(50))
+    phone_number = db.Column(db.String(20))
+    email = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('eventservice', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+
+class Techservice(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    price = db.Column(db.Integer)
+    availability =db.Column(db.String(100))
+    service_location = db.Column(db.String(50))
+    skills_and_expertise = db.Column(db.String(100))
+    certifications = db.Column(db.String(100))
+    phone_number = db.Column(db.String(20))
+    email = db.Column(db.String(20))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('techservice', lazy=True))
+    def __repr__(self):
+        return f'<Entry {self.title}>'
+
+
 def init_app(app):
     db.init_app(app)
